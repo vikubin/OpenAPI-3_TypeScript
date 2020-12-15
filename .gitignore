@@ -1,0 +1,13 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+# Unversioned files
+.gitignore
+.idea/.gitignore
+.idea/OpenAPI-3_TypeScript.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
