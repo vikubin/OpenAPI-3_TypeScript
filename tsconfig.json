@@ -9,10 +9,14 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "sourceMap": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/OpenAPI-Specification",
+    "src/tests"
   ],
   "include": [
     "src/**/*"
