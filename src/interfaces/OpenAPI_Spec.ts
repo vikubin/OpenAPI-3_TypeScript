@@ -18,10 +18,10 @@ interface Tag {
 
 export interface Response {
   description: string; //  REQUIRED. A short description of the response.
-  headers: Map<string, Header | Reference>; //  Maps a header name to its definition.
-  content: Map<string, MediaType>; //  A map containing descriptions of potential response payloads. The
+  headers: Record<string, Header | Reference>; //  Maps a header name to its definition.
+  content: Record<string, MediaType>; //  A map containing descriptions of potential response payloads. The
   // key is a media type or media type range and the value describes it.
-  links: Map<string, Link | Reference>; //  A map of operations links that can be followed from the response.
+  links: Record<string, Link | Reference>; //  A map of operations links that can be followed from the response.
   // The key of the map is a short name for the link, following the
   // naming constraints of the names for Component Objects.
 }
@@ -32,7 +32,7 @@ export interface Reference {
 
 export interface Encoding {
   contentType: string; //  The Content-Type for encoding a specific property.
-  headers: Map<string, Header | Reference>; //  A map allowing additional information to be provided as headers.
+  headers: Record<string, Header | Reference>; //  A map allowing additional information to be provided as headers.
   // This property SHALL be ignored if the request body media type is
   // not a multipart.
   style: string; //  Describes how a specific property value will be serialized
@@ -47,9 +47,9 @@ export interface MediaType {
   // parameter.
   example: MediaType; //  Example of the media type. The example object SHOULD be in the
   // correct format as specified by the media type.
-  examples: Map<string, Example | Reference>; //  Examples of the media type. Each example object SHOULD match the
+  examples: Record<string, Example | Reference>; //  Examples of the media type. Each example object SHOULD match the
   // media type and specified schema if present.
-  encoding: Map<string, Encoding>; //  A map between a property name and its encoding information.
+  encoding: Record<string, Encoding>; //  A map between a property name and its encoding information.
 }
 
 
@@ -111,7 +111,7 @@ export interface Schema {
   not?: (Schema | Reference)[];
   allOf?: (Schema | Reference)[]; // validates the value against all the subschemas
   items?: (Schema | Reference)[];
-  properties?: Map<string, Schema | Reference>;
+  properties?: Record<string, Schema | Reference>;
   additionalProperties?: boolean | Schema | Reference;
   description?: string;
 
@@ -270,11 +270,11 @@ export interface Header {
 
   example: any; //  Example of the parameter's potential value.
 
-  examples: Map<string, Example | Reference>; //  Examples of the parameter's potential value.
+  examples: Record<string, Example | Reference>; //  Examples of the parameter's potential value.
   //  For more complex scenarios, the content property can define the media type and schema of the parameter. A
   // parameter MUST contain either a schema property, or a content property, but not both.
 
-  content: Map<string, MediaType>; //  A map containing the representations for the parameter. The key is the
+  content: Record<string, MediaType>; //  A map containing the representations for the parameter. The key is the
   // media type and the value describes it. The map MUST only contain one entry.
 }
 
@@ -315,7 +315,7 @@ export interface Example {
 export interface RequestBody {
   description: string; //  A brief description of the request body. This could contain samples of
   // use.
-  content: Map<string, MediaType>; //  REQUIRED. The content of the request body. The key is a media type or
+  content: Record<string, MediaType>; //  REQUIRED. The content of the request body. The key is a media type or
   // media type range and the value describes it. For requests that match
   // multiple keys, only the most specific key is applicable. e.g. text/plain
   // overrides text/*
@@ -329,7 +329,7 @@ export interface OAuthFlow {
   tokenUrl: string; // oauth2 ("password", "clientCredentials", "authorizationCode")    REQUIRED. The token
   // URL to be used for this flow.
   refreshUrl: string; // oauth2           The URL to be used for obtaining refresh tokens.
-  scopes: Map<string, string>; // oauth2           REQUIRED. The available scopes for the OAuth2 security scheme. A
+  scopes: Record<string, string>; // oauth2           REQUIRED. The available scopes for the OAuth2 security scheme. A
   // map between the scope name and a short description for it. The map MAY be empty.
 }
 
@@ -379,7 +379,7 @@ export function valid_SecurityScheme(scheme: SecurityScheme): boolean {
 export interface Link {
   operationRef: string;
   operationId: string;
-  parameters: Map<string, PathItem>; //  The key that identifies the Path Item Object is a runtime expression
+  parameters: Record<string, PathItem>; //  The key that identifies the Path Item Object is a runtime expression
 }
 
 
@@ -389,18 +389,18 @@ export interface Link {
  * A map of possible out-of band callbacks related to the parent operation.
  * https://swagger.io/specification/#callback-object
  */
-export type Callback = Map<string, PathItem | PathItem[]>;
+export type Callback = Record<string, PathItem | PathItem[]>;
 
 export interface Components {
-  schemas: Map<string, Schema | Reference>; //  An object to hold reusable Schema Objects.
-  responses: Map<string, Response | Reference>; //  An object to hold reusable Response Objects.
-  parameters: Map<string, Parameter | Reference>;
-  examples: Map<string, Example | Reference>;
-  requestBodies: Map<string, RequestBody | Reference>;
-  headers: Map<string, Header | Reference>;
-  securitySchemes: Map<string, SecurityScheme | Reference>;
-  links: Map<string, Link | Reference>;
-  callbacks: Map<string, Callback | Reference>;
+  schemas: Record<string, Schema | Reference>; //  An object to hold reusable Schema Objects.
+  responses: Record<string, Response | Reference>; //  An object to hold reusable Response Objects.
+  parameters: Record<string, Parameter | Reference>;
+  examples: Record<string, Example | Reference>;
+  requestBodies: Record<string, RequestBody | Reference>;
+  headers: Record<string, Header | Reference>;
+  securitySchemes: Record<string, SecurityScheme | Reference>;
+  links: Record<string, Link | Reference>;
+  callbacks: Record<string, Callback | Reference>;
 }
 
 //  https://swagger.io/specification/#operation-object
@@ -413,12 +413,12 @@ export interface Operation {
   operationId: string; //  Unique string used to identify the operation.
   parameters: (Operation | Parameter)[]; //  A list of parameters that are applicable for this operation.
   requestBody: RequestBody | Reference; //  The request body applicable for this operation.
-  responses: Map<string, Response>; //  REQUIRED. The list of possible responses as they are returned
+  responses: Record<string, Response>; //  REQUIRED. The list of possible responses as they are returned
   // from executing this operation.
-  callback: Map<string, Callback | Reference>; //  A map of possible out-of band callbacks related to the parent
+  callback: Record<string, Callback | Reference>; //  A map of possible out-of band callbacks related to the parent
   // operation.
   deprecated: boolean; //  Declares this operation to be deprecated.
-  security: Map<string, string[]>; //  A declaration of which security mechanisms can be used for this
+  security: Record<string, string[]>; //  A declaration of which security mechanisms can be used for this
   // operation. To make security optional, an empty security
   // requirement ({}) can be included in the array.
   servers: Server[]; //  An alternative server array to service this operation.
@@ -479,7 +479,7 @@ export interface ServerVariable {
 export interface Server {
   url: string; //  REQUIRED. A URL to the target host.
   destination?: string; //  An optional string describing the host designated by the URL.
-  variables?: Map<string, ServerVariable>; //  A map between a variable name and its value.
+  variables?: Record<string, ServerVariable>; //  A map between a variable name and its value.
 }
 
 export function valid_server(server: Server): boolean {
@@ -498,9 +498,9 @@ export default interface OpenAPI_Spec {
   // tooling as required.
   servers?: Server[]; //  An array of Server Objects, which provide connectivity information to a
   // target server.
-  paths: Map<string, PathItem>; //  REQUIRED. The available paths and operations for the OpenAPI.
+  paths: Record<string, PathItem>; //  REQUIRED. The available paths and operations for the OpenAPI.
   components?: Components; //	An element to hold various schemas for the specification.
-  security?: Map<string, string[]>; //  A declaration of which security mechanisms can be used across the OpenAPI.
+  security?: Record<string, string[]>; //  A declaration of which security mechanisms can be used across the OpenAPI.
   // Each name MUST correspond to a security scheme which is declared in the
   // Security Schemes under the Components Object.
   tags?: Tag[]; //  A list of tags used by the specification with additional metadata.
