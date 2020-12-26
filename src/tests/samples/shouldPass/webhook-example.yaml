@@ -3,7 +3,7 @@ info:
   title: Webhook Example
   version: 1.0.0
 paths:
-  # OpenAPI documents all need a paths element
+  # OpenAPI_Spec documents all need a paths element
   /pets:
     get:
       summary: List all pets
@@ -27,7 +27,7 @@ paths:
 webhooks:
   # Each webhook needs a name
   newPet:
-    # This is a Path Item Object, the only difference is that the request is initiated by the API provider
+    # This is a Path Item Object, the only difference is that the request is initiated by the OpenAPI provider
     post:
       requestBody:
         description: Information about a new pet in the system

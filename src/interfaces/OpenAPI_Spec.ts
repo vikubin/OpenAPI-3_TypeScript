@@ -1,5 +1,5 @@
 /*
- * OpenAPI 3.0.3 in TS
+ * OpenAPI_Spec 3.0.3 in TS
  * UNOFFICIAL
  *
  * compiled from Swagger Specs by Phil Kubin (philku)
@@ -55,8 +55,12 @@ export interface MediaType {
 
 //  https://swagger.io/docs/specification/data-models/representing-xml/
 export interface Xml {
-  name?: string; // Overide the schema name 'wrapped' must be set to true
-  namespace?: string; // Absolute URI of the namespace definition.
+
+  // Overide the schema name 'wrapped' must be set to true
+  name?: string;
+
+  // Absolute URI of the namespace definition.
+  namespace?: string;
   prefix?: string;
   attribute?: boolean; // converts property => attribute
   wrapped?: boolean;  // Adds a wrapping element to an array definition
@@ -87,11 +91,10 @@ export interface Schema {
 
   enum?: string[];  //  An enumeration of string values to be used if options are from a limited set.
 
-  // Modified to OpenAPI Spec
+  // Modified to OpenAPI_Spec Spec
   type: "string" | "number" | "integer" | "boolean" | "array" | "object"; // Type of value. (Null can be set for
   // any if 'nullable' is true
 
-  allOf?: (Schema | Reference)[]; // validates the value against all the subschemas
   discriminator?: Record<string, string | Record<string, unknown>>; // key to determine the field that holds the
   // Type Name
   /*
@@ -106,6 +109,7 @@ export interface Schema {
   oneOf?: (Schema | Reference)[]; // validates the value against exactly one of the subschemas
   anyOf?: (Schema | Reference)[]; //  validates the value against any (one or more) of the subschemas
   not?: (Schema | Reference)[];
+  allOf?: (Schema | Reference)[]; // validates the value against all the subschemas
   items?: (Schema | Reference)[];
   properties?: Map<string, Schema | Reference>;
   additionalProperties?: boolean | Schema | Reference;
@@ -218,10 +222,14 @@ export function valid_schema(schema: Schema): boolean {
  * https://swagger.io/specification/#header-object
  */
 export interface Header {
-  description: string; //  A brief description of the parameter. This could contain samples of use.
-  required: boolean; //  Determines whether this parameter is mandatory. If the parameter
-  // location is "path", this property is REQUIRED and its value MUST be
-  // true.
+
+  //  A brief description of the parameter. This could contain samples of use.
+  description: string;
+
+  //  Determines whether this parameter is mandatory. If the parameter location is "path", this property is REQUIRED
+  //  and its value MUST be true
+  required: boolean;
+
   deprecated: boolean; //  Specifies that a parameter is deprecated and SHOULD be transitioned out
   // of usage.
   allowEmptyValue: boolean; //  Sets the ability to pass empty-valued parameters. This is valid only
@@ -337,7 +345,7 @@ export interface SecurityScheme {
   description: string; // Any      A short description for security scheme.
   name: string; // apiKey   REQUIRED. The name of the header, query or cookie
   // parameter to be used.
-  in: string; // apiKey   REQUIRED. The location of the API key. Valid values
+  in: string; // apiKey   REQUIRED. The location of the OpenAPI key. Valid values
   // are "query", "header" or "cookie".
   scheme: string; // http     REQUIRED. The name of the HTTP Authorization scheme
   // to be used in the Authorization header as defined in
@@ -381,7 +389,6 @@ export interface Link {
  * A map of possible out-of band callbacks related to the parent operation.
  * https://swagger.io/specification/#callback-object
  */
-
 export type Callback = Map<string, PathItem | PathItem[]>;
 
 export interface Components {
@@ -399,7 +406,7 @@ export interface Components {
 //  https://swagger.io/specification/#operation-object
 
 export interface Operation {
-  tags: string[]; //  A list of tags for API documentation control.
+  tags: string[]; //  A list of tags for OpenAPI documentation control.
   summary: string; //  A short summary of what the operation does.
   description: string; //  A verbose explanation of the operation behavior.
   externalDocs: ExternalDocumentation; //  Additional external documentation for this operation.
@@ -422,6 +429,7 @@ export interface Operation {
 export interface PathItem {
   $ref: string; //  Allows for an external definition of this path item. The referenced structure MUST be
   // in the format of a Path Item Object.
+
   summary: string; //  An optional, string summary, intended to apply to all operations in this path.
   description: string; //  An optional, string description, intended to apply to all operations in this path.
   get: Operation; //  A definition of a GET operation on this path.
@@ -445,17 +453,17 @@ interface Contact {
 }
 
 interface License {
-  name: string; //  REQUIRED. The license name used for the API.
-  url?: string; //  A URL to the license used for the API. MUST be in the format of a URL.
+  name: string; //  REQUIRED. The license name used for the OpenAPI.
+  url?: string; //  A URL to the license used for the OpenAPI. MUST be in the format of a URL.
 }
 
 interface Info {
-  title: string; // 	REQUIRED. The title of the API.
-  description?: string; //  A short description of the API.
-  termsOfService?: string; //  A URL to the Terms of Service for the API. MUST be in the format of a URL.
-  contact?: Contact; //  The contact information for the exposed API.
-  license?: License; //  The license information for the exposed API.
-  version: string; //  REQUIRED. The version of the OpenAPI document.
+  title: string; // 	REQUIRED. The title of the OpenAPI.
+  description?: string; //  A short description of the OpenAPI.
+  termsOfService?: string; //  A URL to the Terms of Service for the OpenAPI. MUST be in the format of a URL.
+  contact?: Contact; //  The contact information for the exposed OpenAPI.
+  license?: License; //  The license information for the exposed OpenAPI.
+  version: string; //  REQUIRED. The version of the OpenAPI_Spec document.
 }
 
 export interface ServerVariable {
@@ -485,14 +493,14 @@ export function valid_server(server: Server): boolean {
 // https://swagger.io/specification/
 export default interface OpenAPI_Spec {
   openapi: string; // 	REQUIRED. This string MUST be the semantic version number of the
-  // OpenAPI Specification version that the OpenAPI document uses.
-  info: Info; //  REQUIRED. Provides metadata about the API. The metadata MAY be used by
+  // OpenAPI_Spec Specification version that the OpenAPI_Spec document uses.
+  info: Info; //  REQUIRED. Provides metadata about the OpenAPI. The metadata MAY be used by
   // tooling as required.
   servers?: Server[]; //  An array of Server Objects, which provide connectivity information to a
   // target server.
-  paths: Map<string, PathItem>; //  REQUIRED. The available paths and operations for the API.
+  paths: Map<string, PathItem>; //  REQUIRED. The available paths and operations for the OpenAPI.
   components?: Components; //	An element to hold various schemas for the specification.
-  security?: Map<string, string[]>; //  A declaration of which security mechanisms can be used across the API.
+  security?: Map<string, string[]>; //  A declaration of which security mechanisms can be used across the OpenAPI.
   // Each name MUST correspond to a security scheme which is declared in the
   // Security Schemes under the Components Object.
   tags?: Tag[]; //  A list of tags used by the specification with additional metadata.

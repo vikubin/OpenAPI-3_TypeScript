@@ -1,7 +1,11 @@
-import OpenAPI_Spec, {valid_server} from "./interfaces/OpenAPI"
+import OpenAPI_Spec, { } from "./interfaces/OpenAPI_Spec"
 
 
-export default class API {
+
+
+
+
+export default class OpenAPI {
     api: OpenAPI_Spec;
 
     constructor(api: OpenAPI_Spec) {
@@ -14,4 +18,12 @@ export default class API {
 
         return true;
     }
+
+
+
+
+
+
+
+
 }

@@ -1,7 +1,7 @@
-import API from "../API"
+import OpenAPI from "src/OpenAPI"
 import * as path from "path"
 import * as fs from "fs"
-import OpenAPI from "../interfaces/OpenAPI";
+import OpenAPI from "src/interfaces/OpenAPI_Spec";
 
 const spec_example_shouldPass_folder : string = path.resolve(__dirname, './samples/shouldPass');
 const shouldPass_fileNames :string[] = fs.readdirSync(spec_example_shouldPass_folder)
@@ -12,7 +12,7 @@ shouldPass_fileNames.forEach(file => {
     const file_json = require(`${spec_example_shouldPass_folder}/${file}`);
 
     test(`Testing Passing Sample: ${file}`,() => {
-        const new_API = new API(file_json);
+        const new_API = new OpenAPI(file_json);
 
 
         expect(new_API.validate()).toBe(true);
@@ -30,14 +30,14 @@ shouldFail_fileNames.forEach(file => {
 
     test(`Testing Failing Sample: ${file}`,() => {
 
-        const new_API = new API(file_json);
-        expect(()=>{ new API(file_json) }).toThrow()
+        const new_API = new OpenAPI(file_json);
+        expect(()=>{ new OpenAPI(file_json) }).toThrow()
     });
 });
 
 
-// test('OpenAPI First Test', () => {
-//     const new_OpenAPI = new OpenAPI();
+// test('OpenAPI_Spec First Test', () => {
+//     const new_OpenAPI = new OpenAPI_Spec();
 //     console.log(new_OpenAPI);
 //
 //     expect(new_OpenAPI).toBe(0);

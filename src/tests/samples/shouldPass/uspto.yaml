@@ -3,7 +3,7 @@ servers:
   - url: '{scheme}://developer.uspto.gov/ds-api'
     variables:
       scheme:
-        description: 'The Data Set API is accessible via https and http'
+        description: 'The Data Set OpenAPI is accessible via https and http'
         enum:
           - 'https'
           - 'http'
@@ -20,7 +20,7 @@ info:
     without worry about the GET size limitations as well as encoding of the
     input parameters.
   version: 1.0.0
-  title: USPTO Data Set API
+  title: USPTO Data Set OpenAPI
   contact:
     name: Open Data Portal
     url: 'https://developer.uspto.gov'
@@ -207,4 +207,4 @@ components:
               apiDocumentationUrl:
                 type: string
                 format: uriref
-                description: A URL to the API console for each API
+                description: A URL to the OpenAPI console for each OpenAPI
