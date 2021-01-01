@@ -5,203 +5,185 @@
  * compiled from Swagger Specs by Phil Kubin (philku)
  */
 
-
 // OpenAPI Object
 // https://swagger.io/specification/
 export default interface OpenAPIInterface {
-
   // 	REQUIRED. This string MUST be the semantic version number of the OpenAPI_Spec Specification version that the
   // 	OpenAPI_Spec document uses.
-  openapi: string
+  openapi: string;
 
   //  REQUIRED. Provides metadata about the OpenAPI. The metadata MAY be used by tooling as required.
-  info: InfoInterface
+  info: InfoInterface;
 
   //  An array of Server Objects, which provide connectivity information to a target server.
-  servers?: ServerInterface[]
+  servers?: ServerInterface[];
 
   //  REQUIRED. The available paths and operations for the OpenAPI.
-  paths: Record<string, PathItemInterface>
+  paths: Record<string, PathItemInterface>;
 
   //	An element to hold various schemas for the specification.
-  components?: ComponentsInterface
+  components?: ComponentsInterface;
 
   //  A declaration of which security mechanisms can be used across the OpenAPI. Each name MUST correspond to a
   //  security scheme which is declared in the Security Schemes under the Components Object.
-  security?: Record<string, string[]>
+  security?: Record<string, string[]>;
 
   //  A list of tags used by the specification with additional metadata.
-  tags?: TagInterface[]
+  tags?: TagInterface[];
 
   //  Additional external documentation.
-  externalDocs?: ExternalDocumentationInterface
+  externalDocs?: ExternalDocumentationInterface;
 }
-
 
 // Info Object
 // https://swagger.io/specification/#info-object
 export interface InfoInterface {
-
   // 	REQUIRED. The title of the API.
-  title: string
+  title: string;
 
   //  A short description of the API.
-  description?: string
+  description?: string;
 
   //  A URL to the Terms of Service for the OpenAPI. MUST be in the format of a URL.
-  termsOfService?: string
+  termsOfService?: string;
 
   //  The contact information for the exposed OpenAPI.
-  contact?: ContactInterface
+  contact?: ContactInterface;
 
   //  The license information for the exposed OpenAPI.
-  license?: LicenseInterface
+  license?: LicenseInterface;
 
   //  REQUIRED. The version of the OpenAPI_Spec document.
-  version: string
+  version: string;
 }
-
 
 // Contact Object
 // https://swagger.io/specification/#contact-object
 export interface ContactInterface {
-
   //  The identifying name of the contact person/organization.
-  name?: string
+  name?: string;
 
   //  The URL pointing to the contact information. MUST be in the format of a URL.
-  url?: string
+  url?: string;
 
   //  The email address of the contact person/organization. MUST be in the format of an email address.
-  email?: string
+  email?: string;
 }
-
 
 // License Object
 // https://swagger.io/specification/#license-object
 export interface LicenseInterface {
-
   //  REQUIRED. The license name used for the OpenAPI.
-  name: string
+  name: string;
 
   //  A URL to the license used for the OpenAPI. MUST be in the format of a URL.
-  url?: string
+  url?: string;
 }
-
 
 // Server Object
 // https://swagger.io/specification/#server-object
 export interface ServerInterface {
-
   //  REQUIRED. A URL to the target host.
-  url: string
+  url: string;
 
   //  An optional string describing the host designated by the URL.
-  destination?: string
+  destination?: string;
 
   //  A map between a variable name and its value.
-  variables?: Record<string, ServerVariableInterface>
+  variables?: Record<string, ServerVariableInterface>;
 }
-
 
 // Server Variable Object
 // https://swagger.io/specification/#server-variable-object
 export interface ServerVariableInterface {
-
   //  An enumeration of string values to be used if the substitution options are from a limited set. The array
   //  SHOULD NOT be empty.
-  enum?: string[]
+  enum?: string[];
 
   //  REQUIRED. The default value to use for substitution, which SHALL be sent if an alternate value is not supplied.
-  default: string
+  default: string;
 
   //  An optional description for the server variable.
-  description?: string
+  description?: string;
 }
-
 
 // Components Object
 // https://swagger.io/specification/#components-object
 export interface ComponentsInterface {
-
   //  An object to hold reusable Schema Objects.
-  schemas: Record<string, SchemaInterface | ReferenceInterface>
+  schemas: Record<string, SchemaInterface | ReferenceInterface>;
 
   //  An object to hold reusable Response Objects.
-  responses: Record<string, ResponseInterface | ReferenceInterface>
+  responses: Record<string, ResponseInterface | ReferenceInterface>;
 
   //  An object to hold reusable Parameter Objects.
-  parameters: Record<string, ParameterInterface | ReferenceInterface>
+  parameters: Record<string, ParameterInterface | ReferenceInterface>;
 
   //  An object to hold reusable Example Objects.
-  examples: Record<string, ExampleInterface | ReferenceInterface>
+  examples: Record<string, ExampleInterface | ReferenceInterface>;
 
   //  An object to hold reusable Request Body Objects.
-  requestBodies: Record<string, RequestBodyInterface | ReferenceInterface>
+  requestBodies: Record<string, RequestBodyInterface | ReferenceInterface>;
 
   //  An object to hold reusable Header Objects.
-  headers: Record<string, HeaderInterface | ReferenceInterface>
+  headers: Record<string, HeaderInterface | ReferenceInterface>;
 
   //  An object to hold reusable Security Scheme Objects.
-  securitySchemes: Record<string, SecuritySchemeInterface | ReferenceInterface>
+  securitySchemes: Record<string, SecuritySchemeInterface | ReferenceInterface>;
 
   //  An object to hold reusable Link Objects.
-  links: Record<string, LinkInterface | ReferenceInterface>
+  links: Record<string, LinkInterface | ReferenceInterface>;
 
   //  An object to hold reusable Callback Objects.
-  callbacks: Record<string, CallbackType | ReferenceInterface>
+  callbacks: Record<string, CallbackType | ReferenceInterface>;
 }
-
 
 // Path Item Object
 // https://swagger.io/specification/#path-item-object
 export interface PathItemInterface {
-
   //  Allows for an external definition of this path item. The referenced structure MUST be a Path Item Object.
-  $ref?: string
+  $ref?: string;
 
   //  An optional, string summary, intended to apply to all operations in this path.
-  summary?: string
+  summary?: string;
 
   //  An optional, string description, intended to apply to all operations in this path.
-  description?: string
+  description?: string;
 
   //  A definition of a GET operation on this path.
-  get?: OperationInterface
+  get?: OperationInterface;
 
   //  A definition of a PUT operation on this path.
-  put?: OperationInterface
+  put?: OperationInterface;
 
   //  A definition of a POST operation on this path.
-  post?: OperationInterface
+  post?: OperationInterface;
 
   //  A definition of a DELETE operation on this path.
-  delete?: OperationInterface
+  delete?: OperationInterface;
 
   //  A definition of a OPTIONS operation on this path.
-  options?: OperationInterface
+  options?: OperationInterface;
 
   //  A definition of a HEAD operation on this path.
-  head?: OperationInterface
+  head?: OperationInterface;
 
   //  A definition of a PATCH operation on this path.
-  patch?: OperationInterface
+  patch?: OperationInterface;
 
   //  A definition of a TRACE operation on this path.
-  trace?: OperationInterface
+  trace?: OperationInterface;
 
   //  An alternative server array to service all operations in this path
-  servers?: ServerInterface[]
+  servers?: ServerInterface[];
 
   //  A list of parameters that are applicable for all the operations described under this path.
-  parameters?: (OperationInterface | ParameterInterface)[]
+  parameters?: (OperationInterface | ParameterInterface)[];
 }
-
 
 //  Operation Object
 //  https://swagger.io/specification/#operation-object
 export interface OperationInterface {
-
   //  A list of tags for OpenAPI documentation control.
   tags?: string[];
 
@@ -240,11 +222,9 @@ export interface OperationInterface {
   servers?: ServerInterface[];
 }
 
-
 // External Documentation Object
 // https://swagger.io/specification/#external-documentation-object
 export interface ExternalDocumentationInterface {
-
   //  REQUIRED. The URL for the target documentation. Value MUST be in the format of a URL.
   url: string;
 
@@ -252,23 +232,19 @@ export interface ExternalDocumentationInterface {
   description?: string;
 }
 
-
 // Parameter Object
 // https://swagger.io/specification/#parameter-object
 export interface ParameterInterface extends HeaderInterface {
-
   //  REQUIRED. The name of the parameter. Parameter names are case sensitive.
   name: string;
 
   //  REQUIRED. The location of the parameter. Possible values are "query", "header", "path" or "cookie".
-  in: "query" | "header" | "path" | "cookie";
+  in: 'query' | 'header' | 'path' | 'cookie';
 }
-
 
 // Request Body Object
 // https://swagger.io/specification/#request-body-object
 export interface RequestBodyInterface {
-
   //  REQUIRED. The content of the request body. The key is a media type or media type range and the value describes
   //  it. For requests that match multiple keys, only the most specific key is applicable. e.g. text/plain overrides
   //  text
@@ -281,11 +257,9 @@ export interface RequestBodyInterface {
   required?: boolean;
 }
 
-
 //  Media Type Object
 //  https://swagger.io/specification/#media-type-object
 export interface MediaTypeInterface {
-
   //  The schema defining the content of the request, response, or parameter.
   schema: SchemaInterface | ReferenceInterface;
 
@@ -299,11 +273,9 @@ export interface MediaTypeInterface {
   encoding?: Record<string, EncodingInterface>;
 }
 
-
 // Encoding Object
 // https://swagger.io/specification/#encoding-object
 export interface EncodingInterface {
-
   //  The Content-Type for encoding a specific property.
   contentType?: string;
 
@@ -323,11 +295,9 @@ export interface EncodingInterface {
   allowReserved?: boolean;
 }
 
-
 // Response Object
 // https://swagger.io/specification/#response-object
 export interface ResponseInterface {
-
   //  REQUIRED. A short description of the response.
   description: string;
 
@@ -343,16 +313,16 @@ export interface ResponseInterface {
   links?: Record<string, LinkInterface | ReferenceInterface>;
 }
 
-
 //  Callback Object
 //  https://swagger.io/specification/#callback-object
-export type CallbackType = Record<string, PathItemInterface | PathItemInterface[]>;
-
+export type CallbackType = Record<
+  string,
+  PathItemInterface | PathItemInterface[]
+>;
 
 //  Example Object
 //  https://swagger.io/specification/#example-object
 export interface ExampleInterface {
-
   //  Short description for the example.
   summary?: string;
 
@@ -367,11 +337,9 @@ export interface ExampleInterface {
   externalValue?: string;
 }
 
-
 //  Link Object
 //  https://swagger.io/specification/#link-object
 export interface LinkInterface {
-
   //  A relative or absolute URI reference to an OAS operation. This field is mutually exclusive of the operationId
   //  field, and MUST point to an Operation Object.
   operationRef?: string;
@@ -383,20 +351,18 @@ export interface LinkInterface {
   parameters?: Record<string, PathItemInterface>;
 
   //  A literal value or {expression} to use as a request body when calling the target operation.
-  requestBody?: any
+  requestBody?: any;
 
   //  A description of the link
-  description?: string
+  description?: string;
 
   //  A server object to be used by the target operation.
-  server?: ServerInterface
+  server?: ServerInterface;
 }
-
 
 //  Header Object
 //  https://swagger.io/specification/#header-object
 export interface HeaderInterface {
-
   //  A brief description of the parameter/header. This could contain samples of use.
   description?: string;
 
@@ -416,13 +382,13 @@ export interface HeaderInterface {
 
   //  Describes how the parameter value will be serialized depending on the type of the parameter value.
   style?:
-    | "matrix"
-    | "label"
-    | "form"
-    | "simple"
-    | "spaceDelimited"
-    | "pipeDelimited"
-    | "deepObject";
+    | 'matrix'
+    | 'label'
+    | 'form'
+    | 'simple'
+    | 'spaceDelimited'
+    | 'pipeDelimited'
+    | 'deepObject';
 
   //  When this is true, parameter/header values of type array or object generate separate parameters for each value of
   // the array or key-value pair of the map.
@@ -448,11 +414,9 @@ export interface HeaderInterface {
   content?: Record<string, MediaTypeInterface>;
 }
 
-
 //  Tag Object
 //  https://swagger.io/specification/#tag-object
 export interface TagInterface {
-
   //  REQUIRED. The name of the tag.
   name: string;
 
@@ -463,15 +427,12 @@ export interface TagInterface {
   externalDocs?: ExternalDocumentationInterface;
 }
 
-
 //  Reference Object
 //  https://swagger.io/specification/#reference-object
 export interface ReferenceInterface {
-
   //  REQUIRED. The reference string.
   $ref: string;
 }
-
 
 // Schema Object
 //  https://swagger.io/specification/#schema-object
@@ -482,20 +443,20 @@ export interface SchemaInterface {
   description?: string;
 
   // Type of value. (Null can be set for any if 'nullable' is true)
-  type: "string" | "number" | "integer" | "boolean" | "array" | "object";
+  type: 'string' | 'number' | 'integer' | 'boolean' | 'array' | 'object';
 
   //  Format of type
   format:
-    | "int32" // type: integer
-    | "int64" // type: integer
-    | "float" // type: number
-    | "double" // type: number
-    | "byte" // type: string  (files)
-    | "binary" // type: string  (files)
-    | "date" // type: string
-    | "date-time" // type: string
-    | "password"// type: string
-    | string;   // Format is technically open.
+    | 'int32' // type: integer
+    | 'int64' // type: integer
+    | 'float' // type: number
+    | 'double' // type: number
+    | 'byte' // type: string  (files)
+    | 'binary' // type: string  (files)
+    | 'date' // type: string
+    | 'date-time' // type: string
+    | 'password' // type: string
+    | string; // Format is technically open.
 
   // Default value
   default?: any;
@@ -520,7 +481,6 @@ export interface SchemaInterface {
   // Specifies that a schema is deprecated and SHOULD be transitioned out of usage.
   deprecated?: boolean;
 
-
   /* NUMBER | INTEGER */
   // type: number|integer   Numbers can be restricted to a multiple of a given number, using the multipleOf keyword
   multipleOf?: number;
@@ -537,7 +497,6 @@ export interface SchemaInterface {
   // Is the min exclusive. i.e. Can the number be the minimum
   exclusiveMinimum?: boolean;
 
-
   /* STRING */
   // string, minimum length
   minLength?: number;
@@ -550,7 +509,6 @@ export interface SchemaInterface {
 
   // An enumeration of string values to be used if options are from a limited set.
   enum?: string[];
-
 
   /* ARRAY */
   // array, maximum length
@@ -587,7 +545,6 @@ export interface SchemaInterface {
 
   items?: (SchemaInterface | ReferenceInterface)[];
 
-
   /* OBJECT */
   // object, Object.keys(object).length maximum
   maxProperties?: number;
@@ -604,12 +561,10 @@ export interface SchemaInterface {
   additionalProperties?: boolean | SchemaInterface | ReferenceInterface;
 }
 
-
 //  XML Object
 //  https://swagger.io/specification/#xml-object
 //  https://swagger.io/docs/specification/data-models/representing-xml/
 export interface XmlInterface {
-
   // Overide the schema name 'wrapped' must be set to true
   name?: string;
 
@@ -625,13 +580,11 @@ export interface XmlInterface {
   wrapped?: boolean;
 }
 
-
 //  Security Scheme Object
 //  https://swagger.io/specification/#security-scheme-object
 export interface SecuritySchemeInterface {
-
   // Any      REQUIRED. The type of the security scheme.
-  type: "apiKey" | "http" | "oauth2" | "openIdConnect";
+  type: 'apiKey' | 'http' | 'oauth2' | 'openIdConnect';
 
   // Any      A short description for security scheme.
   description?: string;
@@ -657,7 +610,6 @@ export interface SecuritySchemeInterface {
   openIdConnectUrl: string;
 }
 
-
 /**
  * OAuth Flows Object
  *
@@ -665,7 +617,6 @@ export interface SecuritySchemeInterface {
  * https://swagger.io/specification/#oauth-flows-object
  */
 export interface OAuthFlowsInterface {
-
   //  Configuration for the OAuth Implicit flow
   implicit?: OAuthFlowInterface;
 
@@ -679,7 +630,6 @@ export interface OAuthFlowsInterface {
   authorizationCode?: OAuthFlowInterface;
 }
 
-
 /**
  * OAuth Flow Object
  *
@@ -687,7 +637,6 @@ export interface OAuthFlowsInterface {
  * https://swagger.io/specification/#oauth-flow-object
  */
 export interface OAuthFlowInterface {
-
   // oauth2 ("implicit", "authorizationCode")   REQUIRED. The authorization URL to be used for this flow.
   authorizationUrl?: string;
 

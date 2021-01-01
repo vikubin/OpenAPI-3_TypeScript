@@ -1,8 +1,10 @@
-import OpenAPI_Spec, {ParameterInterface, SchemaInterface, SecuritySchemeInterface} from "./interfaces/OpenAPI_Spec"
-
+import OpenAPI_Spec, {
+  ParameterInterface,
+  SchemaInterface,
+  SecuritySchemeInterface,
+} from './interfaces/OpenAPI_Spec';
 
 // TODO: Validation and methods in this file
-
 
 export default class OpenAPI {
   api: OpenAPI_Spec;
@@ -14,25 +16,23 @@ export default class OpenAPI {
   validate() {
     console.log(Object.keys(this.api));
 
-
     return true;
   }
 }
 
-
 export function valid_schema(schema: SchemaInterface): boolean {
-
   // All types must use
-  const g_required_fields: Array<keyof SchemaInterface> = ["type"];
+  const g_required_fields: Array<keyof SchemaInterface> = ['type'];
 
   const valid_string = (s: SchemaInterface) => {
-
     // Must Use
     const required_fields: Array<keyof SchemaInterface> = [];
     [...g_required_fields, ...required_fields].forEach(field_name => {
       if (s[field_name] === undefined) {
         return false;
       }
+
+      // TODO
     });
 
     // Can't use
@@ -41,6 +41,8 @@ export function valid_schema(schema: SchemaInterface): boolean {
       if (s[field_name] !== undefined) {
         return false;
       }
+
+      // TODO
     });
 
     return true;
@@ -49,7 +51,7 @@ export function valid_schema(schema: SchemaInterface): boolean {
   const valid_number = ({format}: SchemaInterface) => {
     if (format) {
       if (!/^("float"|"double")$/.test(format)) {
-        console.warn(Error("Invalid number."));
+        console.warn(Error('Invalid number.'));
         return false;
       }
     }
@@ -60,7 +62,7 @@ export function valid_schema(schema: SchemaInterface): boolean {
   const valid_integer = ({format}: SchemaInterface) => {
     if (format) {
       if (!/^("int32"|"int64")$/.test(format)) {
-        console.warn(Error("Invalid integer."));
+        console.warn(Error('Invalid integer.'));
         return false;
       }
     }
@@ -81,63 +83,58 @@ export function valid_schema(schema: SchemaInterface): boolean {
   };
 
   switch (schema.type) {
-    case "string":
+    case 'string':
       return valid_string(schema);
-    case "number":
+    case 'number':
       return valid_number(schema);
-    case "integer":
+    case 'integer':
       return valid_integer(schema);
-    case "boolean":
+    case 'boolean':
       return valid_boolean(schema);
-    case "array":
+    case 'array':
       return valid_array(schema);
-    case "object":
+    case 'object':
       return valid_object(schema);
     default:
-      console.warn(`Invalid schema.type: `, schema.type);
+      console.warn('Invalid schema.type: ', schema.type);
       return false;
   }
 }
 
-
 export function valid_parameter(parameter: ParameterInterface): boolean {
   switch (parameter.in) {
-    case "query":
-        if (parameter.style) {
-            return  /^("form"|"spaceDelimited"|"pipeDelimited"|"deepObject")$/.test(parameter.style)
-        } else {
-            return true;
-        }
-    case "header":
-      return parameter.style === "simple";
-    case "path":
-        if (parameter.style) {
-            return /^("matrix"|"label"|"simple")$/.test(parameter.style)
-        } else {
-            return true;
-        }
-    case "cookie":
-      return parameter.style === "form";
+    case 'query':
+      if (parameter.style) {
+        return /^("form"|"spaceDelimited"|"pipeDelimited"|"deepObject")$/.test(
+          parameter.style
+        );
+      } else {
+        return true;
+      }
+    case 'header':
+      return parameter.style === 'simple';
+    case 'path':
+      if (parameter.style) {
+        return /^("matrix"|"label"|"simple")$/.test(parameter.style);
+      } else {
+        return true;
+      }
+    case 'cookie':
+      return parameter.style === 'form';
   }
 }
 
-
 export function valid_SecurityScheme(scheme: SecuritySchemeInterface): boolean {
   switch (scheme.type) {
-    case "apiKey":
+    case 'apiKey':
       return !!(scheme.name && scheme.in);
-    case "http":
+    case 'http':
       return !!scheme.scheme;
-    case "oauth2":
+    case 'oauth2':
       return !!scheme.flows;
-    case "openIdConnect":
+    case 'openIdConnect':
       return !!scheme.openIdConnectUrl;
     default:
       return false;
   }
 }
-
-
-
-
-
