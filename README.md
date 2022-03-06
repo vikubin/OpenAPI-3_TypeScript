@@ -1,3 +1,6 @@
+** DEPRECIATED - Use https://github.com/OAI/OpenAPI-Specification **
+
+
 # OpenAPI_Spec-3_TypeScript
 This is an UNOFFICIAL document providing the OpenAPI_Spec 3 spec 
 in TypeScript. This is for my personal use. You can use it if you'd like,
